@@ -73,6 +73,9 @@ var insertDom = {
 $(".send").on("click", function () {
 
     pickScreen() // 切屏函数
+    for (var prop in insertDom){
+        $("." + insertDom[prop]).empty()
+    }
     for (var prop in classArr) {
         $("." + insertDom[prop]).append($("." + prop).val())
     }
