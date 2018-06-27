@@ -74,8 +74,6 @@ li:first-child{
     margin-top: 1rem;
 }
 
-
-
 .icon{
     position: absolute;
     width: 1.2rem;
@@ -117,30 +115,6 @@ textarea[class^="check-"]{
     height: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width:500px){
 
     .send{
@@ -181,5 +155,10 @@ textarea[class^="check-"]{
         box-sizing: border-box;
         width: calc(100% - 300px);
         height: 100%;
+    }
+    
+    .checklist {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
 };
