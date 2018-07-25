@@ -65,19 +65,44 @@ var classArr = {
     "JS": "JS"
 }
 var insertDom = {
+
+    // 对应插入位置的class名
     "HTML": "show",
     "CSS": "style",
     "JS": "script"
 }
-
+var textVal = {
+    "HTML": "在这里粘贴html",
+    "CSS": "在这里粘贴css..",
+    "JS": "在这里粘贴js.."
+}
 $(".send").on("click", function () {
 
     pickScreen() // 切屏函数
     for (var prop in insertDom){
+        
+        // 在插入新代码前，将原来的代码区间清空 
         $("." + insertDom[prop]).empty()
     }
     for (var prop in classArr) {
-        $("." + insertDom[prop]).append($("." + prop).val())
+
+        // 插入前先判断是否已修改html、css、js默认内容，若为修改，则将其置空
+
+        if($("." + prop).val() == textVal[prop]){
+            console.log($("." + prop).val());
+            $("." + prop).html(" ");
+        }
+        
+        // 将html、css、js里面的值插入到对应的show、style、script之间
+        if(insertDom[prop] != "script"){
+            $("." + insertDom[prop]).append($("." + prop).val())
+        }else{
+            try {
+                eval($("." + prop).val())
+            } catch (error) {
+                alert(error);       
+            }
+        }
     }
 })
 
