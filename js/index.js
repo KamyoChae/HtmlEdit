@@ -1,3 +1,4 @@
+
 $(".checklist").on("click", "li", function () {
 
     // 选项卡
@@ -76,33 +77,48 @@ var textVal = {
     "CSS": "在这里粘贴css..",
     "JS": "在这里粘贴js.."
 }
+for(var prop in classArr){
+
+    // 获取焦点 清空内容
+        $("." + prop).focus(function(){
+            $(this).html("")
+        })
+}
 $(".send").on("click", function () {
 
-    pickScreen() // 切屏函数
+ 
     for (var prop in insertDom){
         
         // 在插入新代码前，将原来的代码区间清空 
         $("." + insertDom[prop]).empty()
     }
+
     for (var prop in classArr) {
 
-        // 插入前先判断是否已修改html、css、js默认内容，若为修改，则将其置空
+        // 插入前先判断是否已修改html、css、js默认内容，若未修改，则将其置空
 
         if($("." + prop).val() == textVal[prop]){
             console.log($("." + prop).val());
-            $("." + prop).html(" ");
+            $("." + prop).html("");
         }
         
         // 将html、css、js里面的值插入到对应的show、style、script之间
         if(insertDom[prop] != "script"){
             $("." + insertDom[prop]).append($("." + prop).val())
         }else{
-            try {
-                eval($("." + prop).val())
-            } catch (error) {
-                alert(error);       
+            if($(".HTML").val() != "" || $(".CSS").val() != "" || $(".JS").val() != ""  ){
+                try {
+                    eval($("." + prop).val())
+                    pickScreen() // 切屏函数 如果报错 则不会进行页面跳转
+                } catch (error) {
+                    alert(error);       
+                }
+            }else{
+                alert("输入不能为空！")
             }
+
         }
     }
 })
+
 
